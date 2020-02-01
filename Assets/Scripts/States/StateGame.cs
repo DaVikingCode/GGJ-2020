@@ -7,13 +7,16 @@ public class StateGame : BaseState
     UIGame uigame;
 
 	public int cardUsed = 0;
+	public CardData currentCard;
+	public Spell currentSpell;
 
 	public override void Initialize()
     {
         base.Initialize();
         uigame = UIManager.instance.SwitchScreen<UIGame>();
 
-		//this.game.deckHandler.initializeDeck();
+		currentSpell = game.deckHandler.getRandomSpell();
+		currentCard = game.deckHandler.getRandomCard();
     }
 
 	private void Update()

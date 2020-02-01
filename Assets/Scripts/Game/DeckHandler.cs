@@ -9,21 +9,20 @@ public class DeckHandler : MonoBehaviour
     public Spell currentSpell = null;
     public List<CardData> deck = new List<CardData>();
     public CardData currentCard = null;
-	private int _currentIndex = 0;
 
 	public void Initialize()
     {
         cardsSO = Resources.Load<CardsScriptableObject>("Cards");
     }
 
-    Spell getRandomSpell()
+    public Spell getRandomSpell()
     {
 		int lightness = cardsSO.minLightness + cardsSO.lightnessStep * Random.Range(0, (cardsSO.maxLightness - cardsSO.minLightness) / cardsSO.lightnessStep);
 		int hue = cardsSO.minHue + cardsSO.hueStep * Random.Range(0, (cardsSO.maxHue - cardsSO.minHue) / cardsSO.hueStep);
 		return new Spell(hue, lightness);
     }
 
-	CardData getRandomCard()
+	public CardData getRandomCard()
 	{
 		return cardsSO.cards[Random.Range(0, cardsSO.cards.Count())];
 	}
