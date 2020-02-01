@@ -8,8 +8,20 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public StateManager stateManager;
     [HideInInspector] public DeckHandler deckHandler;
 
-    #region UNITY
-    void Awake()
+	public int a = 0;
+	public int b = 0;
+	public int c = 0;
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+
+		}
+	}
+
+	#region UNITY
+	void Awake()
     {
         stateManager = GetComponent<StateManager>() ?? gameObject.AddComponent<StateManager>();
         deckHandler = GetComponent<DeckHandler>() ?? gameObject.AddComponent<DeckHandler>();
