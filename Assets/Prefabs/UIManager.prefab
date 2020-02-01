@@ -1010,6 +1010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frame: {fileID: 8710070637943533332}
   background: {fileID: 2477207372240680572}
+  card: {fileID: 3375504250022318440}
 --- !u!1 &8885600611893615620
 GameObject:
   m_ObjectHideFlags: 0

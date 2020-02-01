@@ -8,6 +8,7 @@ public class UIGame : BaseUIScreen
 {
     public Image frame;
     public Image background;
+    public UICard card;
 
     public void SetTarget(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {

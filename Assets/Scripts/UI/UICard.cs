@@ -43,11 +43,11 @@ public class UICard : MonoBehaviour
     {
         Vector2 targetPosition = this.rect.anchoredPosition;
         Vector2 startPosition = targetPosition + new Vector2(0f, 1000f);
-        return GameManager.instance.animationManager.Animate(1f, (float t) =>
+        yield return GameManager.instance.animationManager.Animate(1f, (float t) =>
          {
              this.rect.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
              return true;
-         });
+         }, AnimationManager.EASING.ELASTIC_IN,null);
     }
 
     public void SwipeCard(bool right)
