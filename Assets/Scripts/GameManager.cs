@@ -3,54 +3,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public SpellsScriptableObject spellsSO;
-	public CardsScriptableObject cardsSO;
+    public static GameManager instance;
 
-	public SpellData currentSpell = null;
-	public List<CardData> deck = new List<CardData>();
-	public CardData currentCard = null;
+	public StateManager stateManager;
+    public DeckHandler deckHandler;
 
-	SpellData getRandomSpell()
-	{
-		if(spellsSO != null && spellsSO.spells != null)
-		{
-			int randomIndex = Random.Range(0, spellsSO.spells.Length);
-			return spellsSO.spells[randomIndex];
-		}
-		return null;
-	}
+    #region UNITY
+    void Awake()
+    {
+        stateManager = GetComponent<StateManager>();
+        if (stateManager == null)
+        {
+            stateManager = this.gameObject.AddComponent<StateManager>();
+        }
 
-	CardData getRandomCardFromList(CardData[] cards)
-	{
-		return cards[Random.Range(0, cards.Length)];
-	}
+        deckHandler = GetComponent<DeckHandler>();
+        if (deckHandler == null)
+        {
+            deckHandler = this.gameObject.AddComponent<DeckHandler>();
+        }
 
-	CardData[] initializeDeck()
-	{
-		if (currentSpell != null)
-		{
-			CardData card = getRandomCardFromList(cardsSO.cards);
-			deck.Add(card);
+        instance = this;
+    }
 
-			// Check spell requirement 
-			// Pick or get random card ?
-		}
+    private void Start()
+    {
+        deckHandler.Initialize();
+        stateManager.Initialize();
 
-		return null;
-	}
+        stateManager.SwitchToState<StateInit>();
 
-	bool checkSpellRequirements(CardData[] deck, SpellData spell)
-	{
-		int a = 0; int b = 0; int c = 0;
-
-		foreach (CardData card in deck)
-		{
-			a += card.a;
-			b += card.b;
-			c += card.c;
-		}
-
-		return spell.minA < a;
-	}
+    }
+    #endregion
 
 }
