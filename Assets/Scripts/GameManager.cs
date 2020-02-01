@@ -11,17 +11,8 @@ public class GameManager : MonoBehaviour
     #region UNITY
     void Awake()
     {
-        stateManager = GetComponent<StateManager>();
-        if (stateManager == null)
-        {
-            stateManager = this.gameObject.AddComponent<StateManager>();
-        }
-
-        deckHandler = GetComponent<DeckHandler>();
-        if (deckHandler == null)
-        {
-            deckHandler = this.gameObject.AddComponent<DeckHandler>();
-        }
+        stateManager = GetComponent<StateManager>() ?? gameObject.AddComponent<StateManager>();
+        deckHandler = GetComponent<DeckHandler>() ?? gameObject.AddComponent<DeckHandler>();
 
         instance = this;
     }
