@@ -31,7 +31,6 @@ public class DeckHandler : MonoBehaviour
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
-
 		List<CardData> pool = new List<CardData>();
 
 		for (int i = 0; i < numberOfCards; i++)
@@ -45,34 +44,59 @@ public class DeckHandler : MonoBehaviour
 
     }
 
-    public CardData[] initializeDeck()
+    public List<CardData> initializeDeck()
     {
-		// Pick 3 cards from pool
-		List<CardData>[] result = this.getRandomCardsFromList(cardsSO.cards.ToList(), 3);
-		List<CardData> initialPool = result[0];
-		List<CardData> remainingCards = result[1];
-		Debug.Log(initialPool);
+		List<CardData> initialPool = new List<CardData>();
+		List<CardData> remainingCards = new List<CardData>();
 
-		return null;
-		// Check wich spell is possible
-		// IF a least one, select a random spell form possible
-		// ELSE redo
-		// 
-		// Fill with 2 random cards
+		Debug.Log("Cards counts : " + cardsSO.cards.ToList().Count);
+
+		while (currentSpell == null)
+		{
+			deck = new List<CardData>();
+			List<CardData>[] result = this.getRandomCardsFromList(cardsSO.cards.ToList(), 4);
+			initialPool = result[0];
+			remainingCards = result[1];
+			deck.AddRange(initialPool);
+
+			List<SpellData> availableSpells = this.findPlayableSpells(deck);
+			if(availableSpells.Count > 0)
+			{
+				currentSpell = availableSpells[Random.Range(0, availableSpells.Count)];
+			}
+		}
+
+		List<CardData> filler = this.getRandomCardsFromList(remainingCards, 3)[0];
+		deck.AddRange(filler);
+
+		return deck;
     }
 
-    bool checkSpellRequirements(CardData[] deck, SpellData spell)
+    List<SpellData> findPlayableSpells(List<CardData> deck)
     {
-        int a = 0; int b = 0; int c = 0;
+		List<SpellData> availableSpells = new List<SpellData>();
 
-        foreach (CardData card in deck)
-        {
-            a += card.a;
-            b += card.b;
-            c += card.c;
-        }
+		foreach ( SpellData spell in spellsSO.spells )
+		{
+			int a = 0;
+			int b = 0;
+			int c = 0;
 
-        return spell.minA < a;
+			foreach (CardData card in deck)
+			{
+				a += card.a;
+				b += card.b;
+				c += card.c;
+			}
+			if (spell.minA < a && a < spell.maxA
+				&& spell.minB < b && b < spell.maxB
+				&& spell.minC < c && c < spell.maxC)
+			{
+				availableSpells.Add(spell);
+			};
+		}
+
+		return availableSpells;
     }
 
 }
