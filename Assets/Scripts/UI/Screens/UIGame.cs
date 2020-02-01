@@ -6,51 +6,29 @@ using UnityEngine.UI;
 
 public class UIGame : BaseUIScreen
 {
-    public Image rA;
-    public Image rB;
-    public Image rC;
+    public Image frame;
+    public Image background;
 
-    public TextMeshProUGUI tA;
-    public TextMeshProUGUI tB;
-    public TextMeshProUGUI tC;
-
-    public void SetResourceDisplay(int resourceIndex, int value)
+    public void SetTarget(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
-        tA.text = tB.text = tC.text = null;
-        rA.rectTransform.localScale = rB.rectTransform.localScale = rC.rectTransform.localScale = Vector3.one;
-
-        if(value !=0)
-        switch(resourceIndex)
-        {
-            case 0:
-                StartCoroutine(PopResource(rA));
-                tA.text = value.ToString();
-                break;
-            case 1:
-                StartCoroutine(PopResource(rB));
-                tB.text = value.ToString();
-                break;
-            case 2:
-                StartCoroutine(PopResource(rC));
-                tC.text = value.ToString();
-                break;
-        }
-
+        Color c = GetColor(hue, lightness, hueScale, lightness);
+        frame.color = c;
     }
 
-    IEnumerator PopResource(Image img)
+    public void SetCurrent(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
-        Vector3 scale1 = img.rectTransform.localScale;
-        Vector3 scaleB = new Vector3(1.4f, 1.4f, 1f);
-
-        float dur = 1f;
-        for(float time = 0f; time < dur; time += Time.deltaTime)
-        {
-            img.rectTransform.localScale = Vector3.LerpUnclamped(scale1, scaleB, Mathf.Cos(time * 0.02f));
-            yield return null;
-        }
-
-        img.rectTransform.localScale = scale1;
+        Color c = GetColor(hue, lightness, hueScale, lightness);
+        background.color = c;
     }
+
+
+    public Color GetColor(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
+    {
+        hue = hue / hueScale;
+        lightness = lightness / lightnessScale;
+        return Color.HSVToRGB(hue, 1f, lightness);
+    }
+
+
 
 }

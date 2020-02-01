@@ -23,11 +23,8 @@ public class StateGame : BaseState
 			cardUsed++;
 			CardData card = game.deckHandler.currentCard;
 			game.resourceManager.addResource('a', card.a);
-			uigame.SetResourceDisplay(0, card.a);
 			game.resourceManager.addResource('b', card.b);
-			uigame.SetResourceDisplay(1, card.b);
 			game.resourceManager.addResource('c', card.c);
-			uigame.SetResourceDisplay(2, card.c);
 			bool isFinished = game.deckHandler.goToNextCard();
 			if (isFinished)
 				this.game.stateManager.SwitchToState<StateEnd>();

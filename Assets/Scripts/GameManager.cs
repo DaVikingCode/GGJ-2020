@@ -8,13 +8,15 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public StateManager stateManager;
     [HideInInspector] public DeckHandler deckHandler;
 	[HideInInspector] public ResourceManager resourceManager;
+    [HideInInspector] public AnimationManager animationManager;
 
-	#region UNITY
-	void Awake()
+    #region UNITY
+    void Awake()
     {
         stateManager = GetComponent<StateManager>() ?? gameObject.AddComponent<StateManager>();
         deckHandler = GetComponent<DeckHandler>() ?? gameObject.AddComponent<DeckHandler>();
 		resourceManager = GetComponent<ResourceManager>() ?? gameObject.AddComponent<ResourceManager>();
+        animationManager = GetComponent<AnimationManager>() ?? gameObject.AddComponent<AnimationManager>();
 
         instance = this;
     }
