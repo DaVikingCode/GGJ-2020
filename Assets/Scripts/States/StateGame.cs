@@ -16,6 +16,7 @@ public class StateGame : BaseState
         uigame = UIManager.instance.SwitchScreen<UIGame>();
 
 		currentSpell = game.deckHandler.getRandomSpell();
+		Debug.Log(currentSpell);
 		currentCard = game.deckHandler.getRandomCard();
 
         uigame.card.SetSymbol(currentCard.front);
