@@ -8,5 +8,6 @@ public class StateHome : BaseState
     public override void Initialize()
     {
         base.Initialize();
+        UIManager.instance.SwitchScreen<UIHome>();
     }
 }

@@ -9,5 +9,6 @@ public class StateInit : BaseState
     {
         base.Initialize();
         Debug.Log("STATE INIT");
+        this.game.stateManager.SwitchToState<StateHome>();
     }
 }
