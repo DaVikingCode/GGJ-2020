@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spells:
   - front: {fileID: 0}
-    minA: 6
+    minA: 4
     maxA: 12
     minB: -2
     maxB: 2
@@ -28,16 +28,16 @@ MonoBehaviour:
     minC: -2
     maxC: 2
   - front: {fileID: 0}
-    minA: -10
-    maxA: 12
-    minB: -10
-    maxB: 12
-    minC: -10
-    maxC: 12
+    minA: -1
+    maxA: 1
+    minB: 0
+    maxB: 4
+    minC: 0
+    maxC: 4
   - front: {fileID: 0}
     minA: 0
-    maxA: 0
-    minB: 0
-    maxB: 0
-    minC: 0
-    maxC: 0
+    maxA: 6
+    minB: -10
+    maxB: 12
+    minC: -2
+    maxC: 4
