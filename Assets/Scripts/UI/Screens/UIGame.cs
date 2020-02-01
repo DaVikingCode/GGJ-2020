@@ -16,6 +16,10 @@ public class UIGame : BaseUIScreen
 
     public void SetResourceDisplay(int resourceIndex, int value)
     {
+        tA.text = tB.text = tC.text = null;
+        rA.rectTransform.localScale = rB.rectTransform.localScale = rC.rectTransform.localScale = Vector3.one;
+
+        if(value !=0)
         switch(resourceIndex)
         {
             case 0:
@@ -31,6 +35,7 @@ public class UIGame : BaseUIScreen
                 tC.text = value.ToString();
                 break;
         }
+
     }
 
     IEnumerator PopResource(Image img)
