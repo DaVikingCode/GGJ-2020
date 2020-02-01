@@ -52,9 +52,12 @@ public class AnimationManager : MonoBehaviour
 
         for(float time = 0f; time < duration; time += Time.deltaTime)
         {
-            float t = (duration - time) / duration;
+            float t = time / duration;
+
+
             float t1 = curve.Evaluate(t);
-            if(update.Invoke(t1))
+
+            if (update.Invoke(t1))
             {
 
             }
@@ -65,6 +68,9 @@ public class AnimationManager : MonoBehaviour
             yield return null;
         }
 
+        update(1f);
+
+        onComplete?.Invoke();
 
     }
 }

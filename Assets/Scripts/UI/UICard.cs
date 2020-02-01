@@ -17,7 +17,7 @@ public class UICard : MonoBehaviour
     private void Awake()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();
-        ShowFront();
+        ShowFront(false);
     }
 
     public void SetSymbol(Sprite sprite)
@@ -42,10 +42,11 @@ public class UICard : MonoBehaviour
     IEnumerator CPopCard()
     {
         Vector2 targetPosition = this.rect.anchoredPosition;
-        Vector2 startPosition = targetPosition + new Vector2(0f, 1000f);
+        Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
         yield return GameManager.instance.animationManager.Animate(1f, (float t) =>
          {
-             this.rect.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
+            
+             this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
              return true;
          }, AnimationManager.EASING.ELASTIC_IN,()=>
          {
