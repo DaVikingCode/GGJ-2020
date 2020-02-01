@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateInit : BaseState
+public class StateHome : BaseState
 {
 
     public override void Initialize()
     {
         base.Initialize();
-        Debug.Log("STATE INIT");
     }
 }
