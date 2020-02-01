@@ -18,7 +18,7 @@ public class StateHome : BaseState
 
     void OnPlayButton()
     {
-        this.game.stateManager.SwitchToState<StateGame>();
+        this.game.stateManager.SwitchToState<StateIntro>();
     }
 
     override public void OnDestroy()
