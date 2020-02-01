@@ -327,8 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57098656310f24b4a9fb3717fdaee389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellsSO: {fileID: 0}
-  cardsSO: {fileID: 0}
+  spellsSO: {fileID: 11400000, guid: e6396825693065642958c7301e55e0b7, type: 2}
+  cardsSO: {fileID: 11400000, guid: f4e704987b51eb245b1cd0fa746646b2, type: 2}
   currentSpell:
     front: {fileID: 0}
     a: 0
