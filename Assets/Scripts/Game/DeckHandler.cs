@@ -5,24 +5,21 @@ using System;
 
 public class DeckHandler : MonoBehaviour
 {
-    public SpellsScriptableObject spellsSO;
     public CardsScriptableObject cardsSO;
     
-    public SpellData currentSpell = null;
+    public Spell currentSpell = null;
     public List<CardData> deck = new List<CardData>();
     public CardData currentCard = null;
 	private int _currentIndex = 0;
 
     public void Initialize()
     {
-        spellsSO = Resources.Load<SpellsScriptableObject>("Spells");
         cardsSO = Resources.Load<CardsScriptableObject>("Cards");
     }
 
     SpellData getRandomSpell()
     {
-        int randomIndex = UnityEngine.Random.Range(0, spellsSO.spells.Length);
-        return spellsSO.spells[randomIndex];
+		return null;
     }
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
@@ -39,7 +36,7 @@ public class DeckHandler : MonoBehaviour
 		return new List<CardData>[] { pool, cards };
     }
 
-    public void initializeDeck()
+    /*public void initializeDeck()
     {
 		List<CardData> initialPool = new List<CardData>();
 		List<CardData> remainingCards = new List<CardData>();
@@ -70,9 +67,9 @@ public class DeckHandler : MonoBehaviour
 
 		_currentIndex = 0;
 		currentCard = deck[0];
-    }
+    }*/
 
-    List<SpellData> findPlayableSpells(List<CardData> deck)
+    /*List<SpellData> findPlayableSpells(List<CardData> deck)
     {
 		List<SpellData> availableSpells = new List<SpellData>();
 
@@ -95,7 +92,7 @@ public class DeckHandler : MonoBehaviour
 		}
 
 		return availableSpells;
-    }
+    }*/
 
 	public bool goToNextCard()
 	{

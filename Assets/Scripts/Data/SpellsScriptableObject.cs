@@ -6,6 +6,8 @@ using UnityEngine;
 public class SpellsScriptableObject : ScriptableObject
 {
     public SpellData[] spells;
+	public int hueStep = 15;
+	public int lightStep = 25;
 
 #if UNITY_EDITOR
     [MenuItem("Tools/Create spells")]
@@ -25,12 +27,6 @@ public class SpellData
 {
     public Sprite front;
 
-	public int minA;
-	public int maxA;
-
-	public int minB;
-	public int maxB;
-
-	public int minC;
-	public int maxC;
+	public int value;
+	public int type;
 }

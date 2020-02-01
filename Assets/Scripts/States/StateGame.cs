@@ -13,7 +13,7 @@ public class StateGame : BaseState
         base.Initialize();
         uigame = UIManager.instance.SwitchScreen<UIGame>();
 
-		this.game.deckHandler.initializeDeck();
+		//this.game.deckHandler.initializeDeck();
     }
 
 	private void Update()
@@ -22,9 +22,6 @@ public class StateGame : BaseState
 		{
 			cardUsed++;
 			CardData card = game.deckHandler.currentCard;
-			game.resourceManager.addResource('a', card.a);
-			game.resourceManager.addResource('b', card.b);
-			game.resourceManager.addResource('c', card.c);
 			bool isFinished = game.deckHandler.goToNextCard();
 			if (isFinished)
 				this.game.stateManager.SwitchToState<StateEnd>();
