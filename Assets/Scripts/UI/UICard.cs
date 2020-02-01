@@ -20,6 +20,12 @@ public class UICard : MonoBehaviour
         ShowFront();
     }
 
+    public void SetSymbol(Sprite sprite)
+    {
+        mainSymbol.sprite = sprite;
+        mainSymbol.SetNativeSize();
+    }
+
     public void ShowFront(bool value = true)
     {
 
