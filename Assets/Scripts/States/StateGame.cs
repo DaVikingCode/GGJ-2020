@@ -8,5 +8,6 @@ public class StateGame : BaseState
     public override void Initialize()
     {
         base.Initialize();
+		this.game.deckHandler.initializeDeck();
     }
 }

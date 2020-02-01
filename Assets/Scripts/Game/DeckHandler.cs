@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeckHandler : MonoBehaviour
@@ -28,23 +29,33 @@ public class DeckHandler : MonoBehaviour
         return null;
     }
 
-    CardData getRandomCardFromList(CardData[] cards)
+    List<CardData> getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
-        return cards[Random.Range(0, cards.Length)];
+
+		List<CardData> pool = new List<CardData>();
+
+		for (int i = 0; i < numberOfCards; i++)
+		{
+			int randomIndex = Random.Range(0, cards.Count);
+			pool.Add(cards[randomIndex]);
+			cards.RemoveAt(randomIndex);
+		}
+
+        return pool;
     }
 
-    CardData[] initializeDeck()
+    public CardData[] initializeDeck()
     {
-        if (currentSpell != null)
-        {
-            CardData card = getRandomCardFromList(cardsSO.cards);
-            deck.Add(card);
+		List<CardData> initialPool = this.getRandomCardsFromList(cardsSO.cards.ToList(), 3);
+		Debug.Log(initialPool);
 
-            // Check spell requirement 
-            // Pick or get random card ?
-        }
-
-        return null;
+		return null;
+        // Pick 3 cards from pool
+		// Check wich spell is possible
+		// IF a least one, select a random spell form possible
+		// ELSE redo
+		// 
+		// Fill with 2 random cards
     }
 
     bool checkSpellRequirements(CardData[] deck, SpellData spell)
