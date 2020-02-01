@@ -43,12 +43,6 @@ public class DeckHandler : MonoBehaviour
 
 	public bool goToNextCard()
 	{
-		_currentIndex++;
-		if (_currentIndex < deck.Count)
-		{
-			currentCard = deck[_currentIndex];
-			return false;
-		}
 		return true;
 		
 	}
