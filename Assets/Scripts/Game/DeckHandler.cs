@@ -29,7 +29,7 @@ public class DeckHandler : MonoBehaviour
         return null;
     }
 
-    List<CardData> getRandomCardsFromList(List<CardData> cards, int numberOfCards)
+	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
 
 		List<CardData> pool = new List<CardData>();
@@ -41,16 +41,19 @@ public class DeckHandler : MonoBehaviour
 			cards.RemoveAt(randomIndex);
 		}
 
-        return pool;
+		return new List<CardData>[] { pool, cards };
+
     }
 
     public CardData[] initializeDeck()
     {
-		List<CardData> initialPool = this.getRandomCardsFromList(cardsSO.cards.ToList(), 3);
+		// Pick 3 cards from pool
+		List<CardData>[] result = this.getRandomCardsFromList(cardsSO.cards.ToList(), 3);
+		List<CardData> initialPool = result[0];
+		List<CardData> remainingCards = result[1];
 		Debug.Log(initialPool);
 
 		return null;
-        // Pick 3 cards from pool
 		// Check wich spell is possible
 		// IF a least one, select a random spell form possible
 		// ELSE redo
