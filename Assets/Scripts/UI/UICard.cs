@@ -34,6 +34,27 @@ public class UICard : MonoBehaviour
 
     }
 
+    public void PopCard()
+    {
+        StartCoroutine(CPopCard());
+    }
+
+    IEnumerator CPopCard()
+    {
+        Vector2 targetPosition = this.rect.anchoredPosition;
+        Vector2 startPosition = targetPosition + new Vector2(0f, 1000f);
+        return GameManager.instance.animationManager.Animate(1f, (float t) =>
+         {
+             this.rect.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
+             return true;
+         });
+    }
+
+    public void SwipeCard(bool right)
+    {
+
+    }
+
     public void Flip()
     {
         StartCoroutine(CFlip());
