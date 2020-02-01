@@ -28,12 +28,12 @@ MonoBehaviour:
     minC: -2
     maxC: 2
   - front: {fileID: 0}
-    minA: 0
-    maxA: 0
-    minB: 0
-    maxB: 0
-    minC: 0
-    maxC: 0
+    minA: -10
+    maxA: 12
+    minB: -10
+    maxB: 12
+    minC: -10
+    maxC: 12
   - front: {fileID: 0}
     minA: 0
     maxA: 0
