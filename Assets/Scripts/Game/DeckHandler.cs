@@ -23,6 +23,11 @@ public class DeckHandler : MonoBehaviour
 		return new Spell(hue, lightness);
     }
 
+	CardData getRandomCard()
+	{
+		return cardsSO.cards[Random.Range(0, cardsSO.cards.Count())];
+	}
+
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
 		List<CardData> pool = new List<CardData>();
