@@ -20,6 +20,7 @@ public class StateGame : BaseState
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
 
+		//Timer de 20s
 
         uigame.card.SetSymbol(currentCard.front);
         uigame.card.PopCard();
@@ -48,4 +49,6 @@ public class StateGame : BaseState
 		}
 		
 	}
+
+	// Check if done
 }
