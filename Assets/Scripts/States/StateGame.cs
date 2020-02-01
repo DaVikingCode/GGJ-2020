@@ -20,8 +20,15 @@ public class StateGame : BaseState
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
 
+
         uigame.card.SetSymbol(currentCard.front);
         uigame.card.PopCard();
+    }
+
+    private void UpdateColors()
+    {
+        uigame.SetCurrent(currentSpell.hue, currentSpell.lightness);
+        //Changer la target ici avec uigame.SetTarget
     }
 
 	private void Update()
