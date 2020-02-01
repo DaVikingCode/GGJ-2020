@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ public class DeckHandler : MonoBehaviour
 {
     public SpellsScriptableObject spellsSO;
     public CardsScriptableObject cardsSO;
-
+    
     public SpellData currentSpell = null;
     public List<CardData> deck = new List<CardData>();
     public CardData currentCard = null;
@@ -18,22 +17,14 @@ public class DeckHandler : MonoBehaviour
         cardsSO = Resources.Load<CardsScriptableObject>("Cards");
     }
 
-
     SpellData getRandomSpell()
     {
-        if (spellsSO != null && spellsSO.spells != null)
-        {
-            int randomIndex = Random.Range(0, spellsSO.spells.Length);
-            return spellsSO.spells[randomIndex];
-        }
-        return null;
+        int randomIndex = Random.Range(0, spellsSO.spells.Length);
+        return spellsSO.spells[randomIndex];
     }
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
-		if (cards.Count == 0)
-			return null;
-
 		List<CardData> pool = new List<CardData>();
 
 		for (int i = 0; i < numberOfCards; i++)
@@ -44,40 +35,41 @@ public class DeckHandler : MonoBehaviour
 		}
 
 		return new List<CardData>[] { pool, cards };
-
     }
 
-    public List<CardData> initializeDeck()
+    public void initializeDeck()
     {
 		List<CardData> initialPool = new List<CardData>();
 		List<CardData> remainingCards = new List<CardData>();
 
-		while (currentSpell == null)
+        bool spellFound = false;
+
+		while (!spellFound)
 		{
 			deck = new List<CardData>();
-			List<CardData>[] result = this.getRandomCardsFromList(cardsSO.cards.ToList(), 4);
+
+			List<CardData>[] result = getRandomCardsFromList(cardsSO.cards.ToList(), 4);
 			initialPool = result[0];
 			remainingCards = result[1];
 			deck.AddRange(initialPool);
 
-			List<SpellData> availableSpells = this.findPlayableSpells(deck);
-			if(availableSpells.Count > 0)
-			{
-				currentSpell = availableSpells[Random.Range(0, availableSpells.Count)];
-			}
+			List<SpellData> availableSpells = findPlayableSpells(deck);
+            if (availableSpells.Count > 0)
+            {
+                currentSpell = availableSpells[Random.Range(0, availableSpells.Count)];
+                spellFound = true;
+            }
 		}
 
-		List<CardData> filler = this.getRandomCardsFromList(remainingCards, 3)[0];
+		List<CardData> filler = getRandomCardsFromList(remainingCards, 3)[0];
 		deck.AddRange(filler);
-
-		return deck;
     }
 
     List<SpellData> findPlayableSpells(List<CardData> deck)
     {
 		List<SpellData> availableSpells = new List<SpellData>();
 
-		foreach ( SpellData spell in spellsSO.spells )
+		foreach (SpellData spell in spellsSO.spells)
 		{
 			int a = 0;
 			int b = 0;
@@ -92,9 +84,7 @@ public class DeckHandler : MonoBehaviour
 			if (spell.minA <= a && a <= spell.maxA
 				&& spell.minB <= b && b <= spell.maxB
 				&& spell.minC <= c && c <= spell.maxC)
-			{
 				availableSpells.Add(spell);
-			};
 		}
 
 		return availableSpells;
