@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 6297274815358703923}
   - component: {fileID: 2292968072796897674}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9216599a6e16e45e3bcc92497b38928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playBtn: {fileID: 2292968072796897674}
 --- !u!1 &6749084380590080492
 GameObject:
   m_ObjectHideFlags: 0

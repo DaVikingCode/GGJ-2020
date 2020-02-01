@@ -23,13 +23,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SwitchScreen<T>() where T : BaseUIScreen
+    public T SwitchScreen<T>() where T : BaseUIScreen
     {
+        BaseUIScreen res = null;
+
         for(int i = 0; i < screens.Count; i++)
         {
             BaseUIScreen screen = screens[i];
             if(screen.GetType() == typeof(T))
             {
+                res = screen;
                 screen.gameObject.SetActive(true);
             }
             else
@@ -37,6 +40,8 @@ public class UIManager : MonoBehaviour
                 screen.gameObject.SetActive(false);
             }
         }
+
+        return (T)res;
     }
 
     private void OnDestroy()

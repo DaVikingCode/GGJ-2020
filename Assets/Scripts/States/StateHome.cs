@@ -1,13 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class StateHome : BaseState
 {
+    UIHome home;
 
     public override void Initialize()
     {
         base.Initialize();
-        UIManager.instance.SwitchScreen<UIHome>();
+
+       home = UIManager.instance.SwitchScreen<UIHome>();
+       home.playBtn.onClick.AddListener(OnPlayButton);
+    }
+
+    void OnPlayButton()
+    {
+        this.game.stateManager.SwitchToState<StateGame>();
+    }
+
+    override public void OnDestroy()
+    {
+        home.playBtn.onClick.AddListener(OnPlayButton);
     }
 }
