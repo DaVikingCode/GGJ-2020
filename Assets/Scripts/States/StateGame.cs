@@ -9,14 +9,15 @@ public class StateGame : BaseState
 	public int cardUsed = 0;
 	public CardData currentCard;
 	public Spell currentSpell;
+	public Spell targetSpell;
 
 	public override void Initialize()
     {
         base.Initialize();
         uigame = UIManager.instance.SwitchScreen<UIGame>();
 
+		targetSpell = game.deckHandler.getRandomSpell();
 		currentSpell = game.deckHandler.getRandomSpell();
-		Debug.Log(currentSpell);
 		currentCard = game.deckHandler.getRandomCard();
 
         uigame.card.SetSymbol(currentCard.front);
