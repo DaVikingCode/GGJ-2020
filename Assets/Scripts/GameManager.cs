@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-	public StateManager stateManager;
-    public DeckHandler deckHandler;
+	[HideInInspector] public StateManager stateManager;
+    [HideInInspector] public DeckHandler deckHandler;
 
     #region UNITY
     void Awake()
