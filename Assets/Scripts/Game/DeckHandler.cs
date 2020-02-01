@@ -31,6 +31,9 @@ public class DeckHandler : MonoBehaviour
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
     {
+		if (cards.Count == 0)
+			return null;
+
 		List<CardData> pool = new List<CardData>();
 
 		for (int i = 0; i < numberOfCards; i++)
@@ -48,8 +51,6 @@ public class DeckHandler : MonoBehaviour
     {
 		List<CardData> initialPool = new List<CardData>();
 		List<CardData> remainingCards = new List<CardData>();
-
-		Debug.Log("Cards counts : " + cardsSO.cards.ToList().Count);
 
 		while (currentSpell == null)
 		{
@@ -88,9 +89,9 @@ public class DeckHandler : MonoBehaviour
 				b += card.b;
 				c += card.c;
 			}
-			if (spell.minA < a && a < spell.maxA
-				&& spell.minB < b && b < spell.maxB
-				&& spell.minC < c && c < spell.maxC)
+			if (spell.minA <= a && a <= spell.maxA
+				&& spell.minB <= b && b <= spell.maxB
+				&& spell.minC <= c && c <= spell.maxC)
 			{
 				availableSpells.Add(spell);
 			};
