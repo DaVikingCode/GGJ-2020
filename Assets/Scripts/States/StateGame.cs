@@ -6,9 +6,7 @@ public class StateGame : BaseState
 {
     UIGame uigame;
 
-	public int a = 0;
-	public int b = 0;
-	public int c = 0;
+	public int cardUsed = 0;
 
 	public override void Initialize()
     {
@@ -22,14 +20,22 @@ public class StateGame : BaseState
 	{
 		if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
+			cardUsed++;
 			CardData card = game.deckHandler.currentCard;
-			a += card.a;
-			b += card.b;
-			c += card.c;
-			game.deckHandler.goToNextCard();
+			game.resourceManager.addResource('a', card.a);
+			uigame.SetResourceDisplay(0, card.a);
+			game.resourceManager.addResource('b', card.b);
+			uigame.SetResourceDisplay(1, card.b);
+			game.resourceManager.addResource('c', card.c);
+			uigame.SetResourceDisplay(2, card.c);
+			bool isFinished = game.deckHandler.goToNextCard();
+			if (isFinished)
+				this.game.stateManager.SwitchToState<StateEnd>();
 		} else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			game.deckHandler.goToNextCard();
+			bool isFinished = game.deckHandler.goToNextCard();
+			if (isFinished)
+				this.game.stateManager.SwitchToState<StateEnd>();
 		}
 		
 	}
