@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class DeckHandler : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class DeckHandler : MonoBehaviour
 
     SpellData getRandomSpell()
     {
-        int randomIndex = Random.Range(0, spellsSO.spells.Length);
+        int randomIndex = UnityEngine.Random.Range(0, spellsSO.spells.Length);
         return spellsSO.spells[randomIndex];
     }
 
@@ -30,7 +31,7 @@ public class DeckHandler : MonoBehaviour
 
 		for (int i = 0; i < numberOfCards; i++)
 		{
-			int randomIndex = Random.Range(0, cards.Count);
+			int randomIndex = UnityEngine.Random.Range(0, cards.Count);
 			pool.Add(cards[randomIndex]);
 			cards.RemoveAt(randomIndex);
 		}
@@ -57,13 +58,15 @@ public class DeckHandler : MonoBehaviour
 			List<SpellData> availableSpells = findPlayableSpells(deck);
             if (availableSpells.Count > 0)
             {
-                currentSpell = availableSpells[Random.Range(0, availableSpells.Count)];
+                currentSpell = availableSpells[UnityEngine.Random.Range(0, availableSpells.Count)];
                 spellFound = true;
             }
 		}
 
 		List<CardData> filler = getRandomCardsFromList(remainingCards, 3)[0];
 		deck.AddRange(filler);
+
+		deck.Shuffle();
 
 		_currentIndex = 0;
 		currentCard = deck[0];
@@ -94,15 +97,15 @@ public class DeckHandler : MonoBehaviour
 		return availableSpells;
     }
 
-	public void goToNextCard()
+	public bool goToNextCard()
 	{
 		_currentIndex++;
 		if (_currentIndex < deck.Count)
 		{
 			currentCard = deck[_currentIndex];
-		} else {
-			// Deck finished, game finished
+			return false;
 		}
+		return true;
 		
 	}
 
