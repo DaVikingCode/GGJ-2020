@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System;
 
 public class DeckHandler : MonoBehaviour
 {
@@ -12,14 +11,16 @@ public class DeckHandler : MonoBehaviour
     public CardData currentCard = null;
 	private int _currentIndex = 0;
 
-    public void Initialize()
+	public void Initialize()
     {
         cardsSO = Resources.Load<CardsScriptableObject>("Cards");
     }
 
-    SpellData getRandomSpell()
+    Spell getRandomSpell()
     {
-		return null;
+		int lightness = cardsSO.minLightness + cardsSO.lightnessStep * Random.Range(0, (cardsSO.maxLightness - cardsSO.minLightness) / cardsSO.lightnessStep);
+		int hue = cardsSO.minHue + cardsSO.hueStep * Random.Range(0, (cardsSO.maxHue - cardsSO.minHue) / cardsSO.hueStep);
+		return new Spell(hue, lightness);
     }
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)

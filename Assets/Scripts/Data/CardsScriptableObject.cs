@@ -6,7 +6,13 @@ using UnityEngine;
 public class CardsScriptableObject : ScriptableObject
 {
     public CardData[] cards;
+
+	public int minHue = 0;
+	public int maxHue = 360;
 	public int hueStep = 15;
+
+	public int minLightness = 25;
+	public int maxLightness = 75;
 	public int lightnessStep = 25;
 
 #if UNITY_EDITOR
