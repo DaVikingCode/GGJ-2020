@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spells:
   - front: {fileID: 0}
-    minA: 7
-    maxA: 9
-    minB: 2
-    maxB: 4
-    minC: -2
-    maxC: 0
-  - front: {fileID: 0}
-    minA: 10
-    maxA: 15
-    minB: -6
-    maxB: 0
+    minA: 6
+    maxA: 12
+    minB: -2
+    maxB: 2
     minC: -10
-    maxC: 10
+    maxC: 12
+  - front: {fileID: 0}
+    minA: -2
+    maxA: 2
+    minB: -2
+    maxB: 2
+    minC: -2
+    maxC: 2
   - front: {fileID: 0}
     minA: 0
     maxA: 0
