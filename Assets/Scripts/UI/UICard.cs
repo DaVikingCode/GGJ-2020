@@ -47,7 +47,10 @@ public class UICard : MonoBehaviour
          {
              this.rect.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
              return true;
-         }, AnimationManager.EASING.ELASTIC_IN,null);
+         }, AnimationManager.EASING.ELASTIC_IN,()=>
+         {
+             this.Flip();
+         });
     }
 
     public void SwipeCard(bool right)

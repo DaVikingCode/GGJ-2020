@@ -17,6 +17,9 @@ public class StateGame : BaseState
 
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
+
+        uigame.card.SetSymbol(currentCard.front);
+        uigame.card.PopCard();
     }
 
 	private void Update()
