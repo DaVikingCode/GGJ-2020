@@ -10,6 +10,7 @@ public class DeckHandler : MonoBehaviour
     public SpellData currentSpell = null;
     public List<CardData> deck = new List<CardData>();
     public CardData currentCard = null;
+	private int _currentIndex = 0;
 
     public void Initialize()
     {
@@ -63,6 +64,9 @@ public class DeckHandler : MonoBehaviour
 
 		List<CardData> filler = getRandomCardsFromList(remainingCards, 3)[0];
 		deck.AddRange(filler);
+
+		_currentIndex = 0;
+		currentCard = deck[0];
     }
 
     List<SpellData> findPlayableSpells(List<CardData> deck)
@@ -89,5 +93,17 @@ public class DeckHandler : MonoBehaviour
 
 		return availableSpells;
     }
+
+	public void goToNextCard()
+	{
+		_currentIndex++;
+		if (_currentIndex < deck.Count)
+		{
+			currentCard = deck[_currentIndex];
+		} else {
+			// Deck finished, game finished
+		}
+		
+	}
 
 }
