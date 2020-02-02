@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Coffee.UIExtensions;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -11,6 +12,7 @@ public class UICard : MonoBehaviour
     public Image front;
     public Image back;
     public Image mainSymbol;
+    public Shadow shadow;
 
     protected RectTransform rect;
 
