@@ -38,12 +38,10 @@ public class StateGame : BaseState
 
     private void UpdateColors()
     {
-        Debug.Log("Spell lightness " + currentSpell.lightness);
-
-        uigame.SetCurrent(currentSpell.hue % 360f, currentSpell.lightness);
+        //uigame.SetCurrent(currentSpell.hue, currentSpell.lightness);
+		uigame.SetCurrent2(currentSpell, currentCard );
         uigame.SetTarget(targetSpell.hue, targetSpell.lightness);
     }
-
 
 	private void Update()
 	{
@@ -87,7 +85,7 @@ public class StateGame : BaseState
 		}
         
 
-        if (currentSpell.hue == targetSpell.hue && currentSpell.lightness == targetSpell.lightness)
+        if (currentSpell.hue % 360 == targetSpell.hue && currentSpell.lightness == targetSpell.lightness)
             this.game.states.Switch<StateEnd>(currentSpell, true);
         else
         {

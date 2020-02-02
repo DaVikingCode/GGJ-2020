@@ -30,6 +30,7 @@ public class UIIntro : BaseUIScreen
         }
 
 		rightKey.Pop(true);
+		yield return new WaitForSeconds(0.5f);
 		rightKey.Pop(false);
 
 		mainCard.SwipeRight();
@@ -53,6 +54,7 @@ public class UIIntro : BaseUIScreen
 		}
 
 		leftKey.Pop(true);
+		yield return new WaitForSeconds(0.5f);
 		leftKey.Pop(false);
 
 		mainCard.SwipeLeft();
