@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class UIEnd : BaseUIScreen
 {
-    public Image background;
+
+
+    public Image current;
+    public Image target;
+
     public Button tryAgainButton;
 }

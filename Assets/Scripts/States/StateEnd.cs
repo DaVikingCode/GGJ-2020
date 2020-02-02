@@ -5,19 +5,23 @@ using UnityEngine;
 public class StateEnd : BaseState
 {
     public Spell finalSpell;
-	public bool success;
+    public Spell targetSpell;
+
+    public bool success;
 
     UIEnd uiEnd;
     public override void Initialize(params object[] arguments)
     {
         finalSpell = (Spell)arguments[0];
-		success = (bool)arguments[1];
+        targetSpell = (Spell)arguments[1];
+        success = (bool)arguments[2];
 
         base.Initialize();
 
         uiEnd = UIManager.instance.SwitchScreen<UIEnd>();
 
-        uiEnd.background.color = Utils.GetColor(finalSpell.hue, finalSpell.lightness);
+        uiEnd.current.color = Utils.GetColor(finalSpell.hue%360f, finalSpell.lightness%100f);
+        uiEnd.target.color = Utils.GetColor(targetSpell.hue%360f, targetSpell.lightness%100f);
         uiEnd.tryAgainButton.onClick.AddListener(OnTryAgain);
     }
 

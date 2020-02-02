@@ -54,7 +54,7 @@ public class StateGame : BaseState
 		uigame.slider.normalizedValue = Mathf.Max((this.game.gameDuration - timer) / this.game.gameDuration, 0);
 		if(timer < 0)
 		{
-			this.game.states.Switch<StateEnd>(currentSpell, false);
+			this.game.states.Switch<StateEnd>(currentSpell, targetSpell, false);
             return;
 		}
 
@@ -91,7 +91,7 @@ public class StateGame : BaseState
         
 
         if (currentSpell.hue % 360 == targetSpell.hue && currentSpell.lightness == targetSpell.lightness)
-            this.game.states.Switch<StateEnd>(currentSpell, true);
+            this.game.states.Switch<StateEnd>(currentSpell,targetSpell, true);
         else
         {
 			game.deckHandler.goToNextCard();
