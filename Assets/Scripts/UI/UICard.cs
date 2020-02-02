@@ -129,8 +129,16 @@ public class UICard : MonoBehaviour
 
         ShowFront(false);
 
-        Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
-        Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f), Vector3.forward);
+        
+        float flipCard = 0f;
+
+        /* RANDOMLY SHOW CARD UPSIDE DOWN
+        if (Random.Range(0f, 1f) >= 0.9f)
+            flipCard = 1f;
+            */
+
+        Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f) + (flipCard*180f), Vector3.forward);
+        Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f) + (flipCard*180f), Vector3.forward);
 
         Vector2 targetPosition = Vector2.zero;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
