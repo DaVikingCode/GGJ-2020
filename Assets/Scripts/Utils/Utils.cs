@@ -8,6 +8,7 @@ public class Utils
     {
         hue = hue / hueScale;
         lightness = lightness / lightnessScale;
+
         return Color.HSVToRGB(hue, 1f, lightness);
     }
 

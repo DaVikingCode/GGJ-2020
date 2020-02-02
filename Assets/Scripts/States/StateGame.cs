@@ -38,9 +38,12 @@ public class StateGame : BaseState
 
     private void UpdateColors()
     {
-        uigame.SetCurrent(currentSpell.hue, currentSpell.lightness);
+        Debug.Log("Spell lightness " + currentSpell.lightness);
+
+        uigame.SetCurrent(currentSpell.hue % 360f, currentSpell.lightness);
         uigame.SetTarget(targetSpell.hue, targetSpell.lightness);
     }
+
 
 	private void Update()
 	{
