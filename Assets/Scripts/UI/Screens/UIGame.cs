@@ -70,16 +70,13 @@ public class UIGame : BaseUIScreen
         return GameManager.instance.animationManager.Animate(duration, (float t) =>
          {
              float h = 0f;
-             float s = 1f;
              float l = 0f;
 
              h = Mathf.LerpUnclamped(from.hue, to.hue, t);
              //s = Mathf.LerpUnclamped(sA, sB, t);
              l = Mathf.LerpUnclamped(from.val, to.val, t);
 
-             Debug.Log(from.val + " " + to.val + " " + t);
-
-             image.color = Color.HSVToRGB(Mathf.Repeat(h,1f), s, Mathf.Clamp01(l));
+             image.color = Color.HSVToRGB(Mathf.Repeat(h,1f), Utils.saturation, Mathf.Clamp01(l));
              return true;
 
          }, AnimationManager.EASING.LINEAR,()=>
