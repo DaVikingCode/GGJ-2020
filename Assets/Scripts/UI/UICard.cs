@@ -125,7 +125,6 @@ public class UICard : MonoBehaviour
 
         }, AnimationManager.EASING.EASE_OUT, () =>
         {
-            this.group.alpha = startAlpha;
             onComplete?.Invoke();
             this.isAnimating = false;
         });
