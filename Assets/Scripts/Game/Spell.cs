@@ -18,7 +18,7 @@ public class Spell
         switch(card.type)
         {
             case CARD_TYPE.HUE:
-                this.hue = (this.hue + card.value)%360;
+                this.hue += card.value;
                 break;
             case CARD_TYPE.LIGHTNESS:
                 this.lightness = Mathf.Clamp(this.lightness + card.value, 25, 75);
