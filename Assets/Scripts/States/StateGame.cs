@@ -24,6 +24,12 @@ public class StateGame : BaseState
 
         targetSpell = game.deckHandler.getRandomSpell();
 		currentSpell = game.deckHandler.getRandomSpell();
+
+		while( currentSpell.hue == targetSpell.hue )
+		{
+			currentSpell = game.deckHandler.getRandomSpell();
+		}
+
 		currentCard = game.deckHandler.getRandomCard();
 
 		uigame.slider.normalizedValue = 0;
