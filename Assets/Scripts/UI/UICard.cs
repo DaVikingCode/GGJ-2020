@@ -11,6 +11,8 @@ public class UICard : MonoBehaviour
 {
     public Image front;
     public Image back;
+    public Image tlSymbol;
+    public Image brSymbol;
     public Image mainSymbol;
     public Shadow shadow;
 
@@ -54,6 +56,12 @@ public class UICard : MonoBehaviour
     {
         mainSymbol.sprite = sprite;
         mainSymbol.SetNativeSize();
+
+        tlSymbol.sprite = sprite;
+        tlSymbol.SetNativeSize();
+
+        brSymbol.sprite = sprite;
+        brSymbol.SetNativeSize();
     }
 
     public void ShowFront(bool value = true)
@@ -80,7 +88,7 @@ public class UICard : MonoBehaviour
 
         Vector2 targetPosition = this.rect.anchoredPosition;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
-        yield return GameManager.instance.animationManager.Animate(0.8f, (float t) =>
+        yield return GameManager.instance.animationManager.Animate(0.25f, (float t) =>
          {
              this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
             
@@ -110,16 +118,23 @@ public class UICard : MonoBehaviour
     {
         float dur = 0.25f;
 
-        Quaternion rota = this.rect.localRotation * Quaternion.AngleAxis(-90f, Vector3.up);
-        Quaternion rotb = this.rect.localRotation * Quaternion.AngleAxis(0f, Vector3.up) * this.rect.localRotation;
-        Quaternion rotc = this.rect.localRotation * Quaternion.AngleAxis(90f, Vector3.up) * this.rect.localRotation;
+        Quaternion startRotation = this.rect.localRotation;
+
+        Quaternion rota = startRotation * Quaternion.AngleAxis(0f, Vector3.up);
+        Quaternion rotb = startRotation * Quaternion.AngleAxis(90f, Vector3.up);
+        Quaternion rotc = startRotation * Quaternion.AngleAxis(0f, Vector3.up);
+
+        Vector2 startScale = this.rect.localScale;
+        Vector2 popScale = startScale * 1.05f;
 
         rect.rotation = rota;
+        rect.localScale = startScale;
 
         for (float t  = 0f; t < dur; t += Time.unscaledDeltaTime)
         {
-            float t1 =  (dur - t) / dur;
-            rect.rotation = Quaternion.Slerp(rota, rotb, t1);   
+            float t1 =  t / dur;
+            rect.rotation = Quaternion.Slerp(rota, rotb, t1);
+            rect.localScale = Vector2.LerpUnclamped(startScale, popScale,t1);
             yield return null;
         }
 
@@ -129,12 +144,14 @@ public class UICard : MonoBehaviour
 
         for (float t = 0f; t < dur; t += Time.unscaledDeltaTime)
         {
-            float t1 =  (dur - t) / dur;
+            float t1 =  t / dur;
             rect.rotation = Quaternion.Slerp(rotb, rotc, t1);
+            rect.localScale = Vector2.LerpUnclamped(popScale, startScale, t1);
             yield return null;
         }
 
-        rect.rotation = rotb;
+        rect.rotation = rota;
+        rect.localScale = startScale;
 
         this.isAnimating = false;
     }

@@ -46,6 +46,10 @@ public class StateGame : BaseState
         if (uigame.card.isAnimating)
             return;
 
+        //DO NOTHING IF ANIMATING BACKGROUND COLORS
+        if (uigame.animatingColors)
+            return;
+
         bool actionTaken = false;
         bool isFinished = false;
 

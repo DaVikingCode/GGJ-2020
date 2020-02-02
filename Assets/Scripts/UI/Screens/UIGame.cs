@@ -10,6 +10,9 @@ public class UIGame : BaseUIScreen
     public Image background;
     public UICard card;
 
+    [HideInInspector]
+    public bool animatingColors = false;
+
     public void SetTarget(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
         Color c = GetColor(hue, lightness, hueScale, lightness);
@@ -21,7 +24,8 @@ public class UIGame : BaseUIScreen
         Color to = GetColor(hue, lightness, hueScale, lightness);
         Color from = background.color;
 
-        AnimateColorInHSLSpace(background, from, to, 1f);
+        this.animatingColors = true;
+        AnimateColorInHSLSpace(background, from, to, 0.5f);
     }
 
     public Coroutine AnimateColorInHSLSpace(Image image, Color from, Color to, float duration)
@@ -54,7 +58,10 @@ public class UIGame : BaseUIScreen
              image.color = Color.HSVToRGB(Mathf.Repeat(h,1f), s, Mathf.Clamp01(l));
              return true;
 
-         }, AnimationManager.EASING.LINEAR);
+         }, AnimationManager.EASING.LINEAR,()=>
+         {
+             this.animatingColors = false;
+         });
     }
 
 
