@@ -39,6 +39,16 @@ public class UICard : MonoBehaviour
 
     Vector2 shadowTarget;
 
+    public void HideCard()
+    {
+        group.alpha = 0f;
+    }
+
+    public void ShowCard()
+    {
+        group.alpha = 1f;
+    }
+
     private void OnValidate()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();

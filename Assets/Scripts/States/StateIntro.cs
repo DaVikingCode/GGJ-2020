@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class StateIntro : BaseState
 {
-
+    UIIntro uiIntro;
     public override void Initialize(params object[] arguments)
     {
         base.Initialize();
-        Debug.Log("STATE INTRO - todo : card fan animation");
+        uiIntro = UIManager.instance.SwitchScreen<UIIntro>();
+        uiIntro.StartAnimation(EndIntro);
+    }
+
+    void EndIntro()
+    {
         this.game.states.Switch<StateGame>();
     }
 }
