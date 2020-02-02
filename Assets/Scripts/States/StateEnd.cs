@@ -35,4 +35,12 @@ public class StateEnd : BaseState
         uiEnd.tryAgainButton.onClick.RemoveAllListeners();
         base.OnDestroy();
     }
+
+	public void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			this.game.states.Switch<StateGame>();
+		}
+	}
 }
