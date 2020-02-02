@@ -27,7 +27,7 @@ public class DeckHandler : MonoBehaviour
 
     public Spell getRandomSpell()
     {
-		int lightness = cardsSO.minLightness + cardsSO.lightnessStep * Random.Range(0, (cardsSO.maxLightness - cardsSO.minLightness) / cardsSO.lightnessStep);
+		int lightness = Random.value > 0.5 ? 50 : 75 ;//cardsSO.minLightness + cardsSO.lightnessStep * Random.Range(0, (cardsSO.maxLightness - cardsSO.minLightness) / cardsSO.lightnessStep);
 		int hue = cardsSO.minHue + cardsSO.hueStep * Random.Range(0, (cardsSO.maxHue - cardsSO.minHue) / cardsSO.hueStep);
 		return new Spell(hue, lightness);
     }

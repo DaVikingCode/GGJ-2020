@@ -24,7 +24,7 @@ public class UiKeyboardKey : MonoBehaviour
 		Vector2 scaleStart = rectTransform.localScale;
 		Vector2 scaleEnd = direction ? new Vector2(1.3f, 1.3f) : new Vector2(1f,1f);
 
-        yield return GameManager.instance.animationManager.Animate(0.5f,(float t )=> {
+        yield return GameManager.instance.animationManager.Animate(0.2f,(float t )=> {
 
 			this.rectTransform.localScale = Vector2.LerpUnclamped(scaleStart, scaleEnd, t);
             return true;
