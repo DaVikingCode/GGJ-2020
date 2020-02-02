@@ -11,23 +11,6 @@ public class UIGame : BaseUIScreen
     public UICard card;
 	public Slider slider;
 
-    public class UnclampedHSV
-    {
-        public float hue;
-        public float sat;
-        public float val;
-        public Color ToColor()
-        {
-            return Color.HSVToRGB(hue, sat, val);
-        }
-
-        public static UnclampedHSV fromColor(Color c)
-        {
-            UnclampedHSV res = new UnclampedHSV();
-            Color.RGBToHSV(c, out res.hue, out res.sat, out res.val);
-            return res;
-        }
-    }
 
     [HideInInspector]
     public bool animatingColors = false;
@@ -54,9 +37,24 @@ public class UIGame : BaseUIScreen
 	public void SetCurrent2(Spell currentSpell, CardData currentCard) {
 		UnclampedHSV to = new UnclampedHSV()
 		{
-			hue = currentSpell.hue % 360 / 360f + (currentCard.value == 360 ? 1f : 0f),
-			val = currentSpell.lightness
+			hue = (currentSpell.hue %360f) / 360f,
+			val = currentSpell.lightness/100f
 		};
+
+
+
+        if(currentCard.type == CARD_TYPE.HUE)
+        {
+            if (currentCard.value == 360)
+                to.hue += 1f;
+            else
+                to.hue += currentCard.value/360f;
+        }else
+        {
+            to.val += currentCard.value/100f;
+        }
+
+
 		UnclampedHSV from = UnclampedHSV.fromColor(background.color);
 
 		this.animatingColors = true;
@@ -85,4 +83,23 @@ public class UIGame : BaseUIScreen
          });
     }
 
+}
+
+
+public class UnclampedHSV
+{
+    public float hue;
+    public float sat;
+    public float val;
+    public Color ToColor()
+    {
+        return Color.HSVToRGB(hue, sat, val);
+    }
+
+    public static UnclampedHSV fromColor(Color c)
+    {
+        UnclampedHSV res = new UnclampedHSV();
+        Color.RGBToHSV(c, out res.hue, out res.sat, out res.val);
+        return res;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UIGame;
 
 public class StateGame : BaseState
 {
@@ -10,18 +11,21 @@ public class StateGame : BaseState
 	public CardData currentCard;
 	public Spell currentSpell;
 	public Spell targetSpell;
-	public float timer = 20; 
 
+    float timer = 0f;
+	
 	public override void Initialize(params object[] arguments)
     {
         base.Initialize();
         uigame = UIManager.instance.SwitchScreen<UIGame>();
 
-		targetSpell = game.deckHandler.getRandomSpell();
+        timer = this.game.gameDuration;
+
+
+        targetSpell = game.deckHandler.getRandomSpell();
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
 
-		timer = 20;
 		uigame.slider.normalizedValue = 0;
 
         UpdateColors();
@@ -39,14 +43,15 @@ public class StateGame : BaseState
     private void UpdateColors()
     {
         //uigame.SetCurrent(currentSpell.hue, currentSpell.lightness);
-		uigame.SetCurrent2(currentSpell, currentCard );
+        uigame.SetCurrent2(currentSpell, currentCard );
+
         uigame.SetTarget(targetSpell.hue, targetSpell.lightness);
     }
 
 	private void Update()
 	{
 		timer -= Time.deltaTime;
-		uigame.slider.normalizedValue = Mathf.Max((20f - timer) / 20, 0);
+		uigame.slider.normalizedValue = Mathf.Max((this.game.gameDuration - timer) / this.game.gameDuration, 0);
 		if(timer < 0)
 		{
 			this.game.states.Switch<StateEnd>(currentSpell, false);

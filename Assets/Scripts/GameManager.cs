@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public float gameDuration = 20f;
+
 	[HideInInspector] public StateManager states;
     [HideInInspector] public DeckHandler deckHandler;
     [HideInInspector] public AnimationManager animationManager;
