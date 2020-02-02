@@ -51,6 +51,18 @@ public class UIGame : BaseUIScreen
         AnimateColorInHSLSpace(background, from, to, 0.5f);
     }
 
+	public void SetCurrent2(Spell currentSpell, CardData currentCard) {
+		UnclampedHSV to = new UnclampedHSV()
+		{
+			hue = currentSpell.hue % 360 / 360f + (currentCard.value == 360 ? 1f : 0f),
+			val = currentSpell.lightness
+		};
+		UnclampedHSV from = UnclampedHSV.fromColor(background.color);
+
+		this.animatingColors = true;
+		AnimateColorInHSLSpace(background, from, to, 0.5f);
+	}
+
     public Coroutine AnimateColorInHSLSpace(Image image, UnclampedHSV from, UnclampedHSV to, float duration)
     {
 
