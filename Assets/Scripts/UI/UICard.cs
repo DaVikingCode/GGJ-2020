@@ -14,12 +14,37 @@ public class UICard : MonoBehaviour
     public Image mainSymbol;
     public Shadow shadow;
 
+    public float shadowDist = 15f;
+
     protected RectTransform rect;
 
     private void Awake()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();
         ShowFront(false);
+
+        shadowTarget = new Vector2(shadowDist, -shadowDist);
+    }
+
+    Vector2 shadowTarget;
+
+    private void OnValidate()
+    {
+        this.rect = this.gameObject.GetComponent<RectTransform>();
+        shadowTarget = new Vector2(shadowDist, -shadowDist);
+        UpdateShadow();
+    }
+
+    private void Update()
+    {
+        UpdateShadow();
+    }
+
+    void UpdateShadow()
+    {
+        Quaternion rot = this.rect.localRotation;
+        Vector2 shadowAbs = Quaternion.Inverse(rot) * shadowTarget;
+        shadow.effectDistance = shadowAbs;
     }
 
     public void SetSymbol(Sprite sprite)
@@ -43,10 +68,14 @@ public class UICard : MonoBehaviour
 
     IEnumerator CPopCard()
     {
+        Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
+        Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f), Vector3.forward);
+
         Vector2 targetPosition = this.rect.anchoredPosition;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
         yield return GameManager.instance.animationManager.Animate(1f, (float t) =>
          {
+             this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
             
              this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
              return true;
@@ -70,9 +99,9 @@ public class UICard : MonoBehaviour
     {
         float dur = 0.25f;
 
-        Quaternion rota = Quaternion.AngleAxis(-90f, Vector3.up);
-        Quaternion rotb = Quaternion.AngleAxis(0f, Vector3.up);
-        Quaternion rotc = Quaternion.AngleAxis(90f, Vector3.up);
+        Quaternion rota = this.rect.localRotation * Quaternion.AngleAxis(-90f, Vector3.up);
+        Quaternion rotb = this.rect.localRotation * Quaternion.AngleAxis(0f, Vector3.up) * this.rect.localRotation;
+        Quaternion rotc = this.rect.localRotation * Quaternion.AngleAxis(90f, Vector3.up) * this.rect.localRotation;
 
         rect.rotation = rota;
 
