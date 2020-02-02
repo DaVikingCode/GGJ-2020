@@ -80,13 +80,13 @@ public class UICard : MonoBehaviour
 
         Vector2 targetPosition = this.rect.anchoredPosition;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
-        yield return GameManager.instance.animationManager.Animate(1f, (float t) =>
+        yield return GameManager.instance.animationManager.Animate(0.8f, (float t) =>
          {
              this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
             
              this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
              return true;
-         }, AnimationManager.EASING.ELASTIC_IN,()=>
+         }, AnimationManager.EASING.EASE_OUT,()=>
          {
              this.isAnimating = false;
              this.Flip();
