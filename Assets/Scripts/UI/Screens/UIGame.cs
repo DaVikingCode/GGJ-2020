@@ -9,6 +9,7 @@ public class UIGame : BaseUIScreen
     public Image frame;
     public Image background;
     public UICard card;
+	public Slider slider;
 
     [HideInInspector]
     public bool animatingColors = false;

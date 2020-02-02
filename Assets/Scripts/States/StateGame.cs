@@ -22,6 +22,7 @@ public class StateGame : BaseState
 		currentCard = game.deckHandler.getRandomCard();
 
 		timer = 20;
+		uigame.slider.normalizedValue = 0;
 
         UpdateColors();
         ShowCurrentCard();
@@ -44,6 +45,7 @@ public class StateGame : BaseState
 	private void Update()
 	{
 		timer -= Time.deltaTime;
+		uigame.slider.normalizedValue = Mathf.Max((20f - timer) / 20, 0);
 		if(timer < 0)
 		{
 			this.game.states.Switch<StateEnd>(currentSpell, false);
