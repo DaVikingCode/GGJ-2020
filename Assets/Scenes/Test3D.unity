@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57098656310f24b4a9fb3717fdaee389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateManager: {fileID: 0}
+  states: {fileID: 0}
   deckHandler: {fileID: 0}
   resourceManager: {fileID: 0}
   animationManager: {fileID: 0}
