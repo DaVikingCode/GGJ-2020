@@ -162,20 +162,21 @@ public class UICard : MonoBehaviour
          }, AnimationManager.EASING.EASE_OUT,()=>
          {
              this.isAnimating = false;
-             onComplete?.Invoke();
-             this.Flip();
+                         this.Flip(
+                             onComplete
+                         );
          });
 
 
     }
 
-    public void Flip()
+    public void Flip(System.Action onComplete = null)
     {
         this.isAnimating = true;
-        StartCoroutine(CFlip());
+        StartCoroutine(CFlip(onComplete));
     }
 
-    IEnumerator CFlip()
+    IEnumerator CFlip(System.Action onComplete = null)
     {
         float dur = 0.125f;
 
@@ -213,6 +214,8 @@ public class UICard : MonoBehaviour
 
         rect.rotation = rota;
         rect.localScale = startScale;
+
+        onComplete?.Invoke();
 
         this.isAnimating = false;
     }
