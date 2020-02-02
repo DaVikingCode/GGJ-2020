@@ -134,7 +134,8 @@ public class UICard : MonoBehaviour
 
     public void PopCard(System.Action onComplete = null)
     {
-        StartCoroutine(CPopCard(onComplete));
+        if(this.gameObject.activeInHierarchy)
+            StartCoroutine(CPopCard(onComplete));
     }
 
     IEnumerator CPopCard(System.Action onComplete = null)

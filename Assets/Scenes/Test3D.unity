@@ -236,7 +236,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states: {fileID: 0}
   deckHandler: {fileID: 0}
-  resourceManager: {fileID: 0}
   animationManager: {fileID: 0}
 --- !u!4 &864935578
 Transform:
