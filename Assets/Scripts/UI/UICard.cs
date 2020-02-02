@@ -167,7 +167,7 @@ public class UICard : MonoBehaviour
 
     IEnumerator CFlip()
     {
-        float dur = 0.25f;
+        float dur = 0.125f;
 
         Quaternion startRotation = this.rect.localRotation;
 
