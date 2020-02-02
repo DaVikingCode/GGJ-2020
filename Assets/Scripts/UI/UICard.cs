@@ -173,7 +173,10 @@ public class UICard : MonoBehaviour
     public void Flip(System.Action onComplete = null)
     {
         this.isAnimating = true;
-        StartCoroutine(CFlip(onComplete));
+        if (gameObject.activeInHierarchy)
+            StartCoroutine(CFlip(onComplete));
+        else
+            onComplete?.Invoke();
     }
 
     IEnumerator CFlip(System.Action onComplete = null)
