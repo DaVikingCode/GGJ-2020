@@ -109,7 +109,7 @@ public class UICard : MonoBehaviour
 
             return true;
 
-        }, AnimationManager.EASING.EASE_IN, () =>
+        }, AnimationManager.EASING.EASE_OUT, () =>
         {
             this.group.alpha = startAlpha;
             onComplete?.Invoke();
@@ -139,6 +139,7 @@ public class UICard : MonoBehaviour
          {
              this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
              this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
+             this.group.alpha = Mathf.LerpUnclamped(0f, 1f, t);
              return true;
          }, AnimationManager.EASING.EASE_OUT,()=>
          {

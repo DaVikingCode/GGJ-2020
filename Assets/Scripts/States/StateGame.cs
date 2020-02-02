@@ -30,7 +30,6 @@ public class StateGame : BaseState
 
     private void ShowCurrentCard()
     {
-        Debug.Log("ShowCurrentCard");
         uigame.card.SetSymbol(currentCard.front);
         uigame.card.PopCard();
     }
