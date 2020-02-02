@@ -49,6 +49,7 @@ public class StateGame : BaseState
 		if(timer < 0)
 		{
 			this.game.states.Switch<StateEnd>(currentSpell, false);
+            return;
 		}
 
         //DO NOTHING IF CARD IS ANIMATING
