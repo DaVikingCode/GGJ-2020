@@ -15,6 +15,16 @@ public class DeckHandler : MonoBehaviour
         cardsSO = Resources.Load<CardsScriptableObject>("Cards");
     }
 
+    public void takeCard()
+    {
+        Debug.Log("TAKE CARD");
+    }
+
+    public void disposeCard()
+    {
+        Debug.Log("DISPOSE CARD");
+    }
+
     public Spell getRandomSpell()
     {
 		int lightness = cardsSO.minLightness + cardsSO.lightnessStep * Random.Range(0, (cardsSO.maxLightness - cardsSO.minLightness) / cardsSO.lightnessStep);
@@ -43,7 +53,8 @@ public class DeckHandler : MonoBehaviour
 
 	public bool goToNextCard()
 	{
-		return true;
+        this.currentCard = getRandomCard();
+		return false;
 		
 	}
 

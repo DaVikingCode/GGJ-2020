@@ -18,6 +18,9 @@ public class UICard : MonoBehaviour
 
     protected RectTransform rect;
 
+    [HideInInspector]
+    public bool isAnimating = false;
+
     private void Awake()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();
@@ -68,6 +71,10 @@ public class UICard : MonoBehaviour
 
     IEnumerator CPopCard()
     {
+        this.isAnimating = true;
+
+        ShowFront(false);
+
         Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
         Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f), Vector3.forward);
 
@@ -81,8 +88,11 @@ public class UICard : MonoBehaviour
              return true;
          }, AnimationManager.EASING.ELASTIC_IN,()=>
          {
+             this.isAnimating = false;
              this.Flip();
          });
+
+
     }
 
     public void SwipeCard(bool right)
@@ -92,6 +102,7 @@ public class UICard : MonoBehaviour
 
     public void Flip()
     {
+        this.isAnimating = true;
         StartCoroutine(CFlip());
     }
 
@@ -124,6 +135,8 @@ public class UICard : MonoBehaviour
         }
 
         rect.rotation = rotb;
+
+        this.isAnimating = false;
     }
 
 }

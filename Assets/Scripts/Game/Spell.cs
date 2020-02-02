@@ -13,4 +13,16 @@ public class Spell
 		this.hue = aHue;
 		this.lightness = aLightness;
 	}
+    public void AddCardValues(CardData card)
+    {
+        switch(card.type)
+        {
+            case CARD_TYPE.HUE:
+                this.hue += card.value;
+                break;
+            case CARD_TYPE.LIGHTNESS:
+                this.lightness += card.value;
+                break;
+        }
+    } 
 }

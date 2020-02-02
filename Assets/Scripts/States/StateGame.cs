@@ -20,8 +20,16 @@ public class StateGame : BaseState
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
 
-		//Timer de 20s
+        //Timer de 20s
 
+        UpdateColors();
+        ShowCurrentCard();
+
+
+    }
+
+    private void ShowCurrentCard()
+    {
         uigame.card.SetSymbol(currentCard.front);
         uigame.card.PopCard();
     }
@@ -29,24 +37,46 @@ public class StateGame : BaseState
     private void UpdateColors()
     {
         uigame.SetCurrent(currentSpell.hue, currentSpell.lightness);
-        //Changer la target ici avec uigame.SetTarget
+        uigame.SetTarget(targetSpell.hue, targetSpell.lightness);
     }
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.RightArrow))
+        //DO NOTHING IF CARD IS ANIMATING
+        if (uigame.card.isAnimating)
+            return;
+
+        bool actionTaken = false;
+        bool isFinished = false;
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
-			cardUsed++;
-			CardData card = game.deckHandler.currentCard;
-			bool isFinished = game.deckHandler.goToNextCard();
-			if (isFinished)
-				this.game.stateManager.SwitchToState<StateEnd>();
-		} else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            game.deckHandler.takeCard();
+            actionTaken = true;
+
+        } else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			bool isFinished = game.deckHandler.goToNextCard();
-			if (isFinished)
-				this.game.stateManager.SwitchToState<StateEnd>();
-		}
+            game.deckHandler.disposeCard();
+            actionTaken = true;
+        }
+
+
+        if(actionTaken)
+        {
+            cardUsed++;
+
+            isFinished = game.deckHandler.goToNextCard();
+
+            if (isFinished)
+                this.game.stateManager.SwitchToState<StateEnd>();
+            else
+            {
+                currentCard = game.deckHandler.currentCard;
+                currentSpell.AddCardValues(currentCard);
+                ShowCurrentCard();
+                UpdateColors();
+            }
+        }
 		
 	}
 

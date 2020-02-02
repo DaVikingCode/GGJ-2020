@@ -18,8 +18,43 @@ public class UIGame : BaseUIScreen
 
     public void SetCurrent(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
-        Color c = GetColor(hue, lightness, hueScale, lightness);
-        background.color = c;
+        Color to = GetColor(hue, lightness, hueScale, lightness);
+        Color from = background.color;
+
+        AnimateColorInHSLSpace(background, from, to, 1f);
+    }
+
+    public Coroutine AnimateColorInHSLSpace(Image image, Color from, Color to, float duration)
+    {
+        float hA;
+        float sA;
+        float lA;
+        Color.RGBToHSV(from, out hA, out sA, out lA);
+
+        float hB;
+        float sB;
+        float lB;
+        Color.RGBToHSV(to, out hB, out sB, out lB);
+
+        return GameManager.instance.animationManager.Animate(duration, (float t) =>
+         {
+             float h = 0f;
+             float s = 0.5f;
+             float l = 0f;
+
+             if(hA == hB)
+             {
+                 hB = hA + 1f;
+             }
+
+             h = Mathf.LerpUnclamped(hA, hB, t);
+             //s = Mathf.LerpUnclamped(sA, sB, t);
+             l = Mathf.LerpUnclamped(lA, lB, t);
+
+             image.color = Color.HSVToRGB(Mathf.Repeat(h,1f), s, Mathf.Clamp01(l));
+             return true;
+
+         }, AnimationManager.EASING.LINEAR);
     }
 
 
