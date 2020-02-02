@@ -522,31 +522,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4117646550054501983, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117646550054501983, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4117646550054501983, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252382122432600824, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252382122432600824, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7272905203168454132, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
         type: 3}
       propertyPath: m_LocalPosition.x
