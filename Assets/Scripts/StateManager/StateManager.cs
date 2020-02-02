@@ -12,7 +12,7 @@ public class StateManager : MonoBehaviour
 
     }
 
-    public void SwitchToState<T>() where T : BaseState
+    public void Switch<T>(params object[] arguments) where T : BaseState
     {
         if(_currentState != null)
         {
@@ -20,6 +20,6 @@ public class StateManager : MonoBehaviour
         }
 
         _currentState = (T)this.gameObject.AddComponent<T>();
-        _currentState.Initialize();
+        _currentState.Initialize(arguments);
     }
 }

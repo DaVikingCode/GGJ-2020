@@ -6,7 +6,7 @@ public class BaseState : MonoBehaviour
 {
     protected GameManager game;
 
-    public virtual void Initialize()
+    public virtual void Initialize(params object[] arguments)
     {
         this.game = GameManager.instance;
     }

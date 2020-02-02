@@ -11,7 +11,7 @@ public class StateGame : BaseState
 	public Spell currentSpell;
 	public Spell targetSpell;
 
-	public override void Initialize()
+	public override void Initialize(params object[] arguments)
     {
         base.Initialize();
         uigame = UIManager.instance.SwitchScreen<UIGame>();
@@ -69,7 +69,7 @@ public class StateGame : BaseState
         cardUsed++;
 
         if (game.deckHandler.goToNextCard())
-            this.game.stateManager.SwitchToState<StateEnd>();
+            this.game.states.Switch<StateEnd>(currentSpell);
         else
         {
             currentCard = game.deckHandler.currentCard;

@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-	[HideInInspector] public StateManager stateManager;
+	[HideInInspector] public StateManager states;
     [HideInInspector] public DeckHandler deckHandler;
 	[HideInInspector] public ResourceManager resourceManager;
     [HideInInspector] public AnimationManager animationManager;
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     #region UNITY
     void Awake()
     {
-        stateManager = GetComponent<StateManager>() ?? gameObject.AddComponent<StateManager>();
+        states = GetComponent<StateManager>() ?? gameObject.AddComponent<StateManager>();
         deckHandler = GetComponent<DeckHandler>() ?? gameObject.AddComponent<DeckHandler>();
 		resourceManager = GetComponent<ResourceManager>() ?? gameObject.AddComponent<ResourceManager>();
         animationManager = GetComponent<AnimationManager>() ?? gameObject.AddComponent<AnimationManager>();
@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         deckHandler.Initialize();
-        stateManager.Initialize();
+        states.Initialize();
 
-        stateManager.SwitchToState<StateInit>();
+        states.Switch<StateInit>();
 
     }
     #endregion

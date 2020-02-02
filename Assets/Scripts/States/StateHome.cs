@@ -8,7 +8,7 @@ public class StateHome : BaseState
 {
     UIHome home;
 
-    public override void Initialize()
+    public override void Initialize(params object[] arguments)
     {
         base.Initialize();
 
@@ -18,7 +18,7 @@ public class StateHome : BaseState
 
     void OnPlayButton()
     {
-        this.game.stateManager.SwitchToState<StateIntro>();
+        this.game.states.Switch<StateIntro>();
     }
 
     override public void OnDestroy()

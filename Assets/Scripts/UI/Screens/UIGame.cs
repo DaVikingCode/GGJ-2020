@@ -15,13 +15,13 @@ public class UIGame : BaseUIScreen
 
     public void SetTarget(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
-        Color c = GetColor(hue, lightness, hueScale, lightness);
+        Color c = Utils.GetColor(hue, lightness, hueScale, lightness);
         frame.color = c;
     }
 
     public void SetCurrent(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
     {
-        Color to = GetColor(hue, lightness, hueScale, lightness);
+        Color to = Utils.GetColor(hue, lightness, hueScale, lightness);
         Color from = background.color;
 
         this.animatingColors = true;
@@ -63,15 +63,5 @@ public class UIGame : BaseUIScreen
              this.animatingColors = false;
          });
     }
-
-
-    public Color GetColor(float hue, float lightness, float hueScale = 360f, float lightnessScale = 100f)
-    {
-        hue = hue / hueScale;
-        lightness = lightness / lightnessScale;
-        return Color.HSVToRGB(hue, 1f, lightness);
-    }
-
-
 
 }
