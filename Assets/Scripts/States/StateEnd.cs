@@ -17,7 +17,7 @@ public class StateEnd : BaseState
 
         uiEnd = UIManager.instance.SwitchScreen<UIEnd>();
 
-        uiEnd.background.color = Utils.GetColor(finalSpell.hue, finalSpell.lightness);
+        uiEnd.background.color = Utils.GetColor(finalSpell.hue % 360, finalSpell.lightness);
         uiEnd.tryAgainButton.onClick.AddListener(OnTryAgain);
     }
 
