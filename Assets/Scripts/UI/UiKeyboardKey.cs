@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiKeyboardKey : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Image img;
+    private void Awake()
     {
-        
+        img = GetComponent<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Pop()
     {
-        
+        StartCoroutine(CPop());
+    }
+
+    IEnumerator CPop()
+    {
+        yield return GameManager.instance.animationManager.Animate(0.5f,(float t )=> {
+
+            return true;
+        }, AnimationManager.EASING.EASE_IN);
+        yield break;
     }
 }
