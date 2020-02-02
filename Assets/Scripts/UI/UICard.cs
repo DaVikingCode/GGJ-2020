@@ -23,12 +23,18 @@ public class UICard : MonoBehaviour
     [HideInInspector]
     public bool isAnimating = false;
 
+    CanvasGroup group;
+
     private void Awake()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();
         ShowFront(false);
 
         shadowTarget = new Vector2(shadowDist, -shadowDist);
+
+        group = GetComponent<CanvasGroup>();
+        if (group == null)
+            group = this.gameObject.AddComponent<CanvasGroup>();
     }
 
     Vector2 shadowTarget;
@@ -72,12 +78,52 @@ public class UICard : MonoBehaviour
 
     }
 
-    public void PopCard()
+    public void SwipeLeft(System.Action onComplete = null)
     {
-        StartCoroutine(CPopCard());
+        this.isAnimating = true;
+        StartCoroutine(CSwipe(false,onComplete));
     }
 
-    IEnumerator CPopCard()
+    public void SwipeRight(System.Action onComplete = null)
+    {
+        this.isAnimating = true;
+        StartCoroutine(CSwipe(true,onComplete));
+    }
+
+    IEnumerator CSwipe(bool swipeRight,System.Action onComplete = null)
+    {
+        float startAlpha = 1f;
+        float endAlpha = 0f;
+
+        Quaternion startRotation = this.rect.localRotation;
+        Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
+
+        Vector2 startPosition = this.rect.anchoredPosition;
+        Vector2 targetPosition = startPosition + new Vector2(1000f * (swipeRight ? 1f : -1f), 0f);
+
+        yield return GameManager.instance.animationManager.Animate(0.25f, (float t) =>
+        {
+            this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
+            this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
+            this.group.alpha = Mathf.LerpUnclamped(startAlpha, endAlpha, t);
+
+            return true;
+
+        }, AnimationManager.EASING.EASE_IN, () =>
+        {
+            this.group.alpha = startAlpha;
+            onComplete?.Invoke();
+            this.isAnimating = false;
+        });
+        
+    }
+
+    public void PopCard(System.Action onComplete = null)
+    {
+        StartCoroutine(CPopCard(onComplete));
+    }
+
+    IEnumerator CPopCard(System.Action onComplete = null)
     {
         this.isAnimating = true;
 
@@ -86,25 +132,21 @@ public class UICard : MonoBehaviour
         Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
         Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f), Vector3.forward);
 
-        Vector2 targetPosition = this.rect.anchoredPosition;
+        Vector2 targetPosition = Vector2.zero;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
+
         yield return GameManager.instance.animationManager.Animate(0.25f, (float t) =>
          {
              this.rect.localRotation = Quaternion.LerpUnclamped(startRotation, targetRotation, t);
-            
              this.rect.anchoredPosition = Vector2.LerpUnclamped(startPosition, targetPosition, t);
              return true;
          }, AnimationManager.EASING.EASE_OUT,()=>
          {
              this.isAnimating = false;
+             onComplete?.Invoke();
              this.Flip();
          });
 
-
-    }
-
-    public void SwipeCard(bool right)
-    {
 
     }
 

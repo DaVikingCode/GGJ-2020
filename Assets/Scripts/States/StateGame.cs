@@ -30,6 +30,7 @@ public class StateGame : BaseState
 
     private void ShowCurrentCard()
     {
+        Debug.Log("ShowCurrentCard");
         uigame.card.SetSymbol(currentCard.front);
         uigame.card.PopCard();
     }
@@ -50,39 +51,35 @@ public class StateGame : BaseState
         if (uigame.animatingColors)
             return;
 
-        bool actionTaken = false;
-        bool isFinished = false;
-
         if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
             game.deckHandler.takeCard();
-            actionTaken = true;
+            uigame.card.SwipeRight(EndCardSwipe);
 
         } else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             game.deckHandler.disposeCard();
-            actionTaken = true;
+            uigame.card.SwipeLeft(EndCardSwipe);
         }
 
-
-        if(actionTaken)
-        {
-            cardUsed++;
-
-            isFinished = game.deckHandler.goToNextCard();
-
-            if (isFinished)
-                this.game.stateManager.SwitchToState<StateEnd>();
-            else
-            {
-                currentCard = game.deckHandler.currentCard;
-                currentSpell.AddCardValues(currentCard);
-                ShowCurrentCard();
-                UpdateColors();
-            }
-        }
 		
 	}
+
+    void EndCardSwipe()
+    {
+        cardUsed++;
+
+        if (game.deckHandler.goToNextCard())
+            this.game.stateManager.SwitchToState<StateEnd>();
+        else
+        {
+            currentCard = game.deckHandler.currentCard;
+            currentSpell.AddCardValues(currentCard);
+
+            ShowCurrentCard();
+            UpdateColors();
+        }
+    }
 
 	// Check if done
 }
