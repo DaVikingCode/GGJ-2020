@@ -23,12 +23,16 @@ public class UICard : MonoBehaviour
     [HideInInspector]
     public bool isAnimating = false;
 
+    Vector2 initPos;
+
     CanvasGroup group;
 
     private void Awake()
     {
         this.rect = this.gameObject.GetComponent<RectTransform>();
         ShowFront(false);
+
+        initPos = this.rect.anchoredPosition;
 
         shadowTarget = new Vector2(shadowDist, -shadowDist);
 
@@ -108,7 +112,7 @@ public class UICard : MonoBehaviour
         Quaternion startRotation = this.rect.localRotation;
         Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.forward);
 
-        Vector2 startPosition = this.rect.anchoredPosition;
+        Vector2 startPosition = this.initPos;
         Vector2 targetPosition = startPosition + new Vector2(1000f * (swipeRight ? 1f : -1f), 0f);
 
         yield return GameManager.instance.animationManager.Animate(0.25f, (float t) =>
@@ -150,7 +154,7 @@ public class UICard : MonoBehaviour
         Quaternion startRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f) + (flipCard*180f), Vector3.forward);
         Quaternion targetRotation = Quaternion.AngleAxis(UnityEngine.Random.Range(-10f, 10f) + (flipCard*180f), Vector3.forward);
 
-        Vector2 targetPosition = Vector2.zero;
+        Vector2 targetPosition = this.initPos;
         Vector2 startPosition = targetPosition + new Vector2(0f, -1000f);
 
         yield return GameManager.instance.animationManager.Animate(0.25f, (float t) =>
