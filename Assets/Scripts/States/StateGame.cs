@@ -85,8 +85,8 @@ public class StateGame : BaseState
 		if (picked)
 		{
 			cardUsed++;
-			currentSpell.AddCardValues(currentCard);
 			UpdateColors();
+			currentSpell.AddCardValues(currentCard);
 		}
         
 
