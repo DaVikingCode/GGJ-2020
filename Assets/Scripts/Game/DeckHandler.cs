@@ -34,7 +34,16 @@ public class DeckHandler : MonoBehaviour
 
 	public CardData getRandomCard()
 	{
-		return cardsSO.cards[Random.Range(0, cardsSO.cards.Count())];
+		if(deck.Count < 6)
+		{
+			deck = cardsSO.cards.ToList();
+
+		}
+		int randomIndex = Random.Range(0, deck.Count);
+		CardData card = deck[randomIndex];
+		deck.RemoveAt(randomIndex);
+
+		return card;
 	}
 
 	List<CardData>[] getRandomCardsFromList(List<CardData> cards, int numberOfCards)
@@ -51,10 +60,9 @@ public class DeckHandler : MonoBehaviour
 		return new List<CardData>[] { pool, cards };
     }
 
-	public bool goToNextCard()
+	public void goToNextCard()
 	{
         this.currentCard = getRandomCard();
-		return false;
 		
 	}
 

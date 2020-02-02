@@ -16,7 +16,15 @@ public class StateHome : BaseState
        home.playBtn.onClick.AddListener(OnPlayButton);
     }
 
-    void OnPlayButton()
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			OnPlayButton();
+		}
+	}
+
+	void OnPlayButton()
     {
         this.game.states.Switch<StateIntro>();
     }

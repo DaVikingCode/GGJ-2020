@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class StateEnd : BaseState
 {
-    Spell finalSpell;
+    public Spell finalSpell;
+	public bool success;
+
     UIEnd uiEnd;
     public override void Initialize(params object[] arguments)
     {
         finalSpell = (Spell)arguments[0];
+		success = (bool)arguments[1];
+
         base.Initialize();
 
         uiEnd = UIManager.instance.SwitchScreen<UIEnd>();

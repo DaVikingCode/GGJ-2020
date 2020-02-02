@@ -10,6 +10,7 @@ public class StateGame : BaseState
 	public CardData currentCard;
 	public Spell currentSpell;
 	public Spell targetSpell;
+	public float timer = 20; 
 
 	public override void Initialize(params object[] arguments)
     {
@@ -20,7 +21,7 @@ public class StateGame : BaseState
 		currentSpell = game.deckHandler.getRandomSpell();
 		currentCard = game.deckHandler.getRandomCard();
 
-        //Timer de 20s
+		timer = 20;
 
         UpdateColors();
         ShowCurrentCard();
@@ -42,6 +43,12 @@ public class StateGame : BaseState
 
 	private void Update()
 	{
+		timer -= Time.deltaTime;
+		if(timer < 0)
+		{
+			this.game.states.Switch<StateEnd>(currentSpell, false);
+		}
+
         //DO NOTHING IF CARD IS ANIMATING
         if (uigame.card.isAnimating)
             return;
@@ -53,32 +60,35 @@ public class StateGame : BaseState
         if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
             game.deckHandler.takeCard();
-            uigame.card.SwipeRight(EndCardSwipe);
+            uigame.card.SwipeRight(() => EndCardSwipe(true));
 
         } else if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
             game.deckHandler.disposeCard();
-            uigame.card.SwipeLeft(EndCardSwipe);
+            uigame.card.SwipeLeft(() => EndCardSwipe(false));
         }
 
 		
 	}
 
-    void EndCardSwipe()
+    void EndCardSwipe(bool picked)
     {
-        cardUsed++;
+		if (picked)
+		{
+			cardUsed++;
+			currentSpell.AddCardValues(currentCard);
+			UpdateColors();
+		}
+        
 
-        if (game.deckHandler.goToNextCard())
-            this.game.states.Switch<StateEnd>(currentSpell);
+        if (currentSpell.hue == targetSpell.hue && currentSpell.lightness == targetSpell.lightness)
+            this.game.states.Switch<StateEnd>(currentSpell, true);
         else
         {
+			game.deckHandler.goToNextCard();
             currentCard = game.deckHandler.currentCard;
-            currentSpell.AddCardValues(currentCard);
-
             ShowCurrentCard();
-            UpdateColors();
         }
     }
 
-	// Check if done
 }

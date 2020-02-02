@@ -18,10 +18,10 @@ public class Spell
         switch(card.type)
         {
             case CARD_TYPE.HUE:
-                this.hue += card.value;
+                this.hue = (this.hue + card.value)%360;
                 break;
             case CARD_TYPE.LIGHTNESS:
-                this.lightness += card.value;
+                this.lightness = Mathf.Clamp(this.lightness + card.value, 25, 75);
                 break;
         }
     } 
