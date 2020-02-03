@@ -8,7 +8,7 @@ public class StateEnd : BaseState
     public Spell targetSpell;
 
     public bool success;
-
+    bool enableinput = false;
     UIEnd uiEnd;
     public override void Initialize(params object[] arguments)
     {
@@ -23,6 +23,13 @@ public class StateEnd : BaseState
         uiEnd.current.color = Utils.GetColor(finalSpell.hue%360f, finalSpell.lightness%100f);
         uiEnd.target.color = Utils.GetColor(targetSpell.hue%360f, targetSpell.lightness%100f);
         uiEnd.tryAgainButton.onClick.AddListener(OnTryAgain);
+
+        uiEnd.ShowColors(OnColorsShown);
+    }
+
+    void OnColorsShown()
+    {
+        enableinput = true;
     }
 
     void OnTryAgain()
@@ -38,6 +45,9 @@ public class StateEnd : BaseState
 
 	public void Update()
 	{
+        if (!enableinput)
+            return;
+
 		if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			this.game.states.Switch<StateGame>();

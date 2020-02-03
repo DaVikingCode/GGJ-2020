@@ -522,6 +522,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6203973894936067169, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203973894936067169, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7272905203168454132, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,6 +635,21 @@ PrefabInstance:
     - target: {fileID: 7272905203168454132, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979406957152694020, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979406957152694020, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979406957152694020, guid: 830d38e8ba8f046dca0fdc5aac2dd61d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.14509805}
-  m_EffectDistance: {x: 15, y: -15}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.12156863}
+  m_EffectDistance: {x: 25, y: -25}
   m_UseGraphicAlpha: 1
 --- !u!1 &4256285476162075112
 GameObject:
@@ -231,7 +231,7 @@ MonoBehaviour:
   brSymbol: {fileID: 6413315523990390849}
   mainSymbol: {fileID: 5979314053033221618}
   shadow: {fileID: 170468921760966273}
-  shadowDist: 15
+  shadowDist: 25
   isAnimating: 0
 --- !u!1 &4455085482232371836
 GameObject:
